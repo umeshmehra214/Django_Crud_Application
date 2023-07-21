@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>Shot Data</title>
+    <style>
+        table {
+            width: 300px;
+            margin: 50px;
+            padding: 50px;
+            margin-right: 100px;
+        }
+
+        table,
+        tbody,
+        thead,
+        tr,
+        th,
+        td {
+            border: 3px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center; margin-top: 20px;">Show All The Data </h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">S.No.</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            {% if key1 %}
+            <tbody>
+                {% for i in key1 %}
+                <tr>
+                    <th scope="row">{{i.id}}</th>
+                    <td>{{i.Firstname}}</td>
+                    <td>{{i.Lastname}}</td>
+                    <td>{{i.Email}}</td>
+                    <td>{{i.Contact}}</td>
+                    <td>
+                        <form name="EditForm" action="{% url 'editpage' pk=i.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-primary" value="Edit">
+                        </form>
+                    </td>
+                    <td>
+                        <form name="EditForm" action="{% url 'delete' pk=i.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% endif %}
+        </table>
+    </div>
+</body>
